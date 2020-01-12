@@ -1,0 +1,241 @@
+/// create database
+CREATE DATABASE FOSystem;
+
+CONNECT TO FOSystem;
+
+
+/// create tables
+
+CREATE TABLE Customer (
+Customer_ID int primary key not null,
+Customer_Name varchar(20),
+Customer_Number varchar(11),
+Customer_Address varchar(80)
+);
+
+
+CREATE TABLE Payment (
+Payment_ID int primary key not null,
+Payment_method varchar(15),
+Customer_ID int,
+FOREIGN KEY(Customer_ID) REFERENCES Customer
+);
+
+
+CREATE TABLE Menu (
+Item_ID int primary key not null,
+Item_Name varchar(20),
+Item_Description varchar(30),
+Item_Price Decimal(7,2),
+Customer_ID int,
+Restaurant_ID int,
+FOREIGN KEY(Customer_ID) REFERENCES Customer, 
+FOREIGN KEY(Restaurant_ID) REFERENCES Restaurants
+);
+
+
+CREATE Table Order (
+Invoice_ID int primary key not null,
+Items_ID int,
+Driver_ID int,
+Payment_ID int, 
+FOREIGN KEY(Items_ID) REFERENCES Menu, 
+FOREIGN KEY(Driver_ID) REFERENCES Delivery, 
+FOREIGN KEY(Payment_ID) REFERENCES Payment
+);
+
+
+CREATE Table Delivery (
+Driver_ID int primary key not null,
+Driver_Name varchar(18),
+Driver_Number varchar(11)
+);
+
+
+CREATE Table Restaurants (
+Restaurant_ID int primary key not null,
+Restaurant_Address varchar(70),
+Restaurant_Name varchar(17)
+);
+
+/// inserting the values
+
+INSERT INTO Customer VALUES (904211,'Rich Brian','0169277995','Cyberjaya');
+INSERT INTO Customer VALUES (904212,'Taylor','0169277995','Petaling');
+INSERT INTO Customer VALUES (904213,'Tyga','0152669876','Puchong');
+INSERT INTO Customer VALUES (904214,'Chris Brown','0114678567','Kelana');
+INSERT INTO Customer VALUES (904215,'Ayo','0107658732','Cyberjaya');
+INSERT INTO Customer VALUES (904216,'Nicki Minaj','011156789','Subang');
+INSERT INTO Customer VALUES (904217,'John','0134909821','Cyberjaya');
+INSERT INTO Customer VALUES (904218,'Sarah','0112785435','Puchong');
+INSERT INTO Customer VALUES (904219,'Peter','0187976543','Puchong');
+INSERT INTO Customer VALUES (904220,'Kent','0114567002','Cyberjaya');
+INSERT INTO Customer VALUES (904221,'Johnson','0123400098','Petaling');
+INSERT INTO Customer VALUES (904222,'David Smith','0166678454','Kelana');
+INSERT INTO Customer VALUES (904223,'Nick Simmons','0126789654','Subang');
+INSERT INTO Customer VALUES (904224,'Charles','0145667891','Kelana');
+INSERT INTO Customer VALUES (904225,'Yuha','0161234587','Cyberjaya');
+
+select * from customer;
+
+
+INSERT INTO Payment VALUES ('123','Cash',904211);
+INSERT INTO Payment VALUES ('413','Cash',904212);
+INSERT INTO Payment VALUES ('436','Credit Card',904213);
+INSERT INTO Payment VALUES ('654','Paypal',904214);
+INSERT INTO Payment VALUES ('757','Cash',904215);
+INSERT INTO Payment VALUES ('342','Paypal',904216);
+INSERT INTO Payment VALUES ('432','Online',904217);
+INSERT INTO Payment VALUES ('532','Cash',904218);
+INSERT INTO Payment VALUES ('542','Cash',904219);
+INSERT INTO Payment VALUES ('235','Paypal',904220);
+INSERT INTO Payment VALUES ('537','Online',904221);
+INSERT INTO Payment VALUES ('745','Cash',904222);
+INSERT INTO Payment VALUES ('135','Credit Card',904223);
+INSERT INTO Payment VALUES ('653','Paypal',904224);
+INSERT INTO Payment VALUES ('462','Cash',904225);
+
+select * from payment;
+
+
+INSERT INTO Order VALUES (9856,567,452,123);
+INSERT INTO Order VALUES (9857,568,453,413);
+INSERT INTO Order VALUES (9858,569,454,436);
+INSERT INTO Order VALUES (9859,570,455,654);
+INSERT INTO Order VALUES (9860,571,456,757);
+INSERT INTO Order VALUES (9861,572,457,342);
+INSERT INTO Order VALUES (9862,573,458,432);
+INSERT INTO Order VALUES (9863,574,459,532);
+INSERT INTO Order VALUES (9864,575,460,542);
+INSERT INTO Order VALUES (9865,576,461,235);
+INSERT INTO Order VALUES (9866,577,462,537);
+INSERT INTO Order VALUES (9867,578,463,745);
+INSERT INTO Order VALUES (9868,579,464,135);
+INSERT INTO Order VALUES (9869,580,465,653);
+INSERT INTO Order VALUES (9870,581,467,462);
+
+select * from order;
+
+
+INSERT INTO Menu VALUES (567,'Pizza','Large',5.99,904211,712);
+INSERT INTO Menu VALUES (568,'Spaghetti','Regular',4.20,904212,713);
+INSERT INTO Menu VALUES (569,'Curry','Regular',10.99,904213,714);
+INSERT INTO Menu VALUES (570,'Toast','Small',3.00,904214,715);
+INSERT INTO Menu VALUES (571,'Spaghetti','Regular',15.00,904215,716);
+INSERT INTO Menu VALUES (572,'Wings','Large',8.50,904216,717);
+INSERT INTO Menu VALUES (573,'Pizza','Small',6.50,904217,718);
+INSERT INTO Menu VALUES (574,'Mee','Small',5.00,904218,719);
+INSERT INTO Menu VALUES (575,'Bolongnese','Regular',6.99,904219,720);
+INSERT INTO Menu VALUES (576,'Stock','Large',9.50,904220,721);
+INSERT INTO Menu VALUES (577,'Mee','Large',8.00,904221,722);
+INSERT INTO Menu VALUES (578,'Spaghetti','Regular',7.99,904222,723);
+INSERT INTO Menu VALUES (579,'Pizza','Small',10.50,904223,724);
+INSERT INTO Menu VALUES (580,'Spaghetti','Large',7.50,904224,725);
+INSERT INTO Menu VALUES (581,'Pizza','Regular',4.50,904225,726);
+
+select * from menu;
+
+
+INSERT INTO Delivery VALUES (452,'Saleh','016758975');
+INSERT INTO Delivery VALUES (453,'Rakesh','015387092');
+INSERT INTO Delivery VALUES (454,'Yugesh','016749009');
+INSERT INTO Delivery VALUES (455,'Rishi','012574532');
+INSERT INTO Delivery VALUES (456,'Richard','018876509');
+INSERT INTO Delivery VALUES (457,'Thashi','0146267926');
+INSERT INTO Delivery VALUES (458,'Sara','01131708976');
+INSERT INTO Delivery VALUES (459,'Michael','0123446264');
+INSERT INTO Delivery VALUES (460,'Guna','019830876');
+INSERT INTO Delivery VALUES (461,'Selvam','018777689');
+INSERT INTO Delivery VALUES (462,'Arun','013433356');
+INSERT INTO Delivery VALUES (463,'Danial','0109981221');
+INSERT INTO Delivery VALUES (464,'Vinoth','014768397');
+INSERT INTO Delivery VALUES (465,'Azmeer','013679362');
+INSERT INTO Delivery VALUES (467,'Syahmir','017963749');
+
+select * from delivery;
+
+
+INSERT INTO  Restaurants VALUES (712,'Cyberjaya','Joys');
+INSERT INTO  Restaurants VALUES (713,'Cyberjaya','Joys');
+INSERT INTO  Restaurants VALUES (714,'Subang','TGIF');
+INSERT INTO  Restaurants VALUES (715,'Klang','Taipan');
+INSERT INTO  Restaurants VALUES (716,'Kelana','Paragon');
+INSERT INTO  Restaurants VALUES (717,'Cyberjaya','Joys');
+INSERT INTO  Restaurants VALUES (718,'Subang','TGIF');
+INSERT INTO  Restaurants VALUES (719,'Klang','Taipan');
+INSERT INTO  Restaurants VALUES (720,'Cyberjaya','Joys');
+INSERT INTO  Restaurants VALUES (721,'Kelana','Paragon');
+INSERT INTO  Restaurants VALUES (722,'Subang','TGIF');
+INSERT INTO  Restaurants VALUES (723,'Cyberjaya','Joys');
+INSERT INTO  Restaurants VALUES (724,'Cyberjaya','Joys');
+INSERT INTO  Restaurants VALUES (725,'Klang','Taipan');
+INSERT INTO  Restaurants VALUES (726,'Kelana','Paragon');
+
+select * from resturants;
+
+
+
+///Aggeregate Functions
+
+SELECT MAX(Item_Price) FROM MENU;
+
+SELECT MIN(Item_Price) FROM MENU;
+
+/// group by and having
+
+select item_id, count(distinct (item_price)) as quantity
+from menu
+group by item_id
+having avg(Item_Price) > 5;
+
+///trigger
+
+create trigger trg_sales
+after update of item_price on menu
+for each row mode db2sql
+update menu
+set item_price = item_price - 1
+where Item_Description = 'Large';
+
+
+///stored procedure
+
+CREATE PROCEDURE discount(IN it_id int, discount_precent Decimal(7,2))
+BEGIN 
+UPDATE menu
+SET item_price = item_price * Discount_precent
+WHERE it_id = item_id;
+END@
+
+call discount(578, 0.50);
+
+/// view
+
+create view pay_online as
+select payment_ID, customer_ID, payment_method
+from payment
+where payment_method = 'online';
+
+
+/// query for union
+
+select * from payment
+union 
+select * from delivery;
+
+
+/// query for top 5
+
+SELECT item_id, Item_Name, Item_price
+FROM menu 
+ORDER BY Item_price DESC
+LIMIT 5;
+
+
+/// sub qury
+SELECT * FROM customer
+WHERE customer_address IN (SELECT customer_address FROM CUSTOMER WHERE customer_address = 'Cyberjaya');
+
+UPDATE menu
+SET item_price = item_price * 2
+WHERE item_price IN (SELECT item_price FROM menu WHERE item_price < 10 );
